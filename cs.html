@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="iterator.js"></script>-->
+</head>
+<body>
+<script>
+    /*let generator = function* () {
+        yield 1;
+        yield* [2,3,4];
+        yield 5;
+    };
+    function obj() {}
+    obj.prototype[Symbol.iterator] = generator;
+    let data = new obj();
+    for(let i of data) {
+        console.log(i)
+    }*/
+    /*class parent {
+        constructor (name) {
+            this.name = name;
+            this.sayName();
+        }
+        sayName () {
+            console.log(this.name);
+        }
+    }
+    class child extends parent {
+        constructor (name) {
+            super(name);
+        }
+    }
+    let obj1 = new parent('li');
+    console.log(obj1)
+    let obj2 = new child('bin');
+    console.log(obj2)
+    console.log(obj1.__proto__ === parent.prototype)
+    console.log(obj1.__proto__.constructor === parent.prototype.constructor)
+    console.log(parent.prototype.__proto__ === Object.prototype)
+    console.log(parent.prototype.__proto__.constructor === Object)
+    console.log(parent.__proto__ === Function.prototype)
+    console.log(Function.prototype.__proto__ === Object.prototype)
+    console.log(Function.__proto__ === Function.prototype)// Function = new Function()
+    console.log(Object.__proto__ === Function.prototype)//function Object () {} === Object = new Function()
+    console.log(obj2.__proto__ === child.prototype)
+    console.log(obj2.__proto__.constructor === child.prototype.constructor)
+    console.log(child.prototype.__proto__ === parent.prototype)
+    console.log(child.__proto__ === parent)
+    function parent1 (name) {
+        this.name = name;
+        this.sayName();
+    }
+    parent1.prototype = {
+        constructor: parent1,
+        sayName () {
+            console.log(this.name)
+        }
+    }
+    function child1(name) {
+        parent1.call(this, name);
+    }
+    Object.setPrototypeOf(child1.prototype, parent1.prototype)
+    Object.setPrototypeOf(child1, parent1)
+    //child1.prototype = Object.create(parent1.prototype);
+    child1.prototype.constructor = child1;
+    let obj3 = new parent1('li');
+    console.log(obj3)
+    let obj4 = new child1('bin');
+    console.log(obj4)
+    console.log(child1.__proto__)*/
+    /*function* g() {
+        this.a = 11;
+    }
+    let obj = g();
+    console.log(g.prototype === obj.__proto__)
+    function* gen() {
+        this.a = 1;
+        yield this.b = 2;
+        yield this.c = 3;
+    }
+    function F() {
+        return gen.call(gen.prototype);
+    }
+    var f = new F();
+    console.log(f)
+    function mm() {
+        return {
+            mm: 1
+        }
+    }
+    console.log(new mm())*/
+    let obj = {
+        ['kk']: 'asdas'
+    }
+    console.log(obj.kk)
+</script>
+</body>
+</html>

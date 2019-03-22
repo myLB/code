@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button onclick="handler1()">事件1</button>
+    <button onclick="handler2()">事件2</button>
+<script>
+    /*function cached (fn) {
+        var cache = Object.create(null);
+        return (function cachedFn (str) {
+            var hit = cache[str];
+            return hit || (cache[str] = fn(str))
+        })
+    }
+    var hyphenateRE = /\B([A-Z])/g;
+    var hyphenate = cached(function (str) {
+        return str.replace(hyphenateRE, '-$1').toLowerCase()
+    });
+    console.log(hyphenate('null'));*/
+    function click1() {
+        return new Promise((res, rej) => {
+            setTimeout(function () {
+                res(1)
+            },1000)
+        })
+    }
+    function click2() {
+        return new Promise((res, rej) => {
+            setTimeout(function () {
+                res(2)
+            },2000)
+        })
+    }
+    /*let arr = [];
+    let waiting = false;
+    let length = 0;
+    function nextTick(fn) {
+        fn().then(data => {
+            console.log(...data)
+            waiting = false;
+            arr.splice(0, length);
+            console.log(arr)
+        })
+    }
+    function execute() {
+        return Promise.all(arr)
+    }
+    function queueClick(fn) {
+        arr.push(fn());
+        if(!waiting) {
+            length = arr.length;
+            waiting = true;
+            nextTick(execute)
+        }
+    }*/
+    let arr = [];// 保存点击结果
+    let index = -1;// 点击返回的数据保存在arr中的位置
+    let id = 0;// 表示当前已经打印到哪里了
+    function nextPint(sub) {
+        if(id === sub) {
+            for(let i = 0; i < arr.length; i++) {
+                if(arr[i] !== undefined) {
+                    id = i + 1
+                }else {
+                    id = i;
+                    break;
+                }
+            }
+            console.log(...arr.slice(sub, id));
+            if(id > index) {
+                arr = [];
+                index = -1;
+                id = 0;
+            }
+        }
+    }
+    function queueClick(fn) {
+        index++;
+        let sub = index;
+        fn().then(data => {
+            arr[sub] = data;
+            nextPint(sub);
+        }).catch((err) => {
+            arr[sub] = err;
+            nextPint(sub);
+        })
+    }
+    function handler1() {
+        queueClick(click1)
+    }
+    function handler2() {
+        queueClick(click2)
+    }
+</script>
+</body>
+</html>
