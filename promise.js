@@ -90,6 +90,18 @@ class Promise1 {
         parent.callbacks.push(...[child, onFulfilled, onRejected]);
         return child
     }
+    resolve (value) {
+        const parent = new this.constructor((res) => {
+            res(value)
+        });
+        return parent
+    }
+    reject (value) {
+        const parent = new this.constructor((res, rej) => {
+            rej(value)
+        });
+        return parent
+    }
     catch (onRejected) {
         this.then(null, onRejected);
     }
