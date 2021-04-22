@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!--<script src="iterator.js"></script>-->
+    <!--<script src="./class.js"></script>-->
 </head>
 <body>
 <script>
@@ -35,6 +35,8 @@
     let obj1 = new parent('li');
     console.log(obj1)
     let obj2 = new child('bin');
+    console.log(obj1.__proto__)
+    console.log(parent.prototype)
     console.log(obj2)
     console.log(obj1.__proto__ === parent.prototype)
     console.log(obj1.__proto__.constructor === parent.prototype.constructor)
@@ -48,6 +50,16 @@
     console.log(obj2.__proto__.constructor === child.prototype.constructor)
     console.log(child.prototype.__proto__ === parent.prototype)
     console.log(child.__proto__ === parent)
+    function cs(a) {
+        this.a = 1;
+        if(a) console.log(a)
+    }
+    cs.prototype = {
+        name: 2
+    }
+    console.log(new cs().constructor({
+        a: 1
+    }))*/
     function parent1 (name) {
         this.name = name;
         this.sayName();
@@ -55,21 +67,30 @@
     parent1.prototype = {
         constructor: parent1,
         sayName () {
-            console.log(this.name)
+            this.sex = '1';
+            //console.log(this.name)
         }
     }
     function child1(name) {
         parent1.call(this, name);
     }
+    /*Object.setPrototypeOf = function (obj, proto) {
+        obj.__proto__ = proto;
+        return obj;
+    }*/
     Object.setPrototypeOf(child1.prototype, parent1.prototype)
+    console.log(child1.prototype)
     Object.setPrototypeOf(child1, parent1)
+    console.log(child1)
     //child1.prototype = Object.create(parent1.prototype);
     child1.prototype.constructor = child1;
     let obj3 = new parent1('li');
     console.log(obj3)
     let obj4 = new child1('bin');
     console.log(obj4)
-    console.log(child1.__proto__)*/
+    console.log(obj4.__proto__)
+    console.log(obj4.constructor)
+    //console.log(child1.__proto__)
     /*function* g() {
         this.a = 11;
     }
@@ -91,10 +112,30 @@
         }
     }
     console.log(new mm())*/
-    let obj = {
-        ['kk']: 'asdas'
-    }
-    console.log(obj.kk)
+</script>
+<script>
+    /*try {
+        new Promise((res, rej) => {
+            let a = null;
+            res(a.b);
+        }).then(() => {}).catch((err) => {
+            console.log(err)
+        })
+    }catch (e) {
+        //console.log(e)
+    }*/
+    const promise = new Promise((resolve, reject) => {
+        console.log(1);
+        resolve();
+        console.log(2);
+    })
+    promise.then(() => {
+        console.log(3)
+    })
+    setTimeout(() => {
+        console.log(4)
+    }, 0)
+    console.log(5)  1 5 2 3  4
 </script>
 </body>
 </html>

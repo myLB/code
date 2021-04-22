@@ -113,10 +113,7 @@ let computed = {...mapState(['module1/count'])}
 let computed = {...mapState('module1',['count'])}
 //或者对state属性重命名
 let computed = {...mapState('module1',{
-    num: 'count',
-    name(state, getters){
-        
-    }
+    re
 })}
 ```
 为什么不放在`data`而是在`computed`中？

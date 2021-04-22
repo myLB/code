@@ -65,14 +65,14 @@ function reject(promise, reason) {
 }
 const pending = 0, fulfilled = 1, rejected = 2;
 class Promise1 {
-    constructor (resolver) {
+    constructor (fn) {
         this._result = undefined;
         this._status = pending;
         this.callbacks = [];
-        if(typeof resolver !== 'function') throw new TypeError('resolver is not a function');
+        if(typeof fn !== 'function') throw new TypeError('fn is not a function');
         if(this instanceof Promise1) {
             try {
-                resolver((value) => {
+                fn((value) => {
                     resolve(this, value)
                 }, (reason) => {
                     reject(this, reason)
